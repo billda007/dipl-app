@@ -1,7 +1,8 @@
 class Author < ActiveRecord::Base
-  validates :firstname, presence: true
-  validates :surname, presence: true
-  
-  has_many :theses
+	validates :firstname, :surname, presence: true
+	has_many :theses
 
+	def full_name
+		"#{firstname} #{surname}"
+	end
 end

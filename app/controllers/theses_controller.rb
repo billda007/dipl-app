@@ -15,7 +15,7 @@ class ThesesController < ApplicationController
   # GET /theses/new
   def new
     @thesis = Thesis.new
-    @author = Author.new
+    @thesis.author = Author.new
   end
 
   # GET /theses/1/edit
@@ -26,8 +26,7 @@ class ThesesController < ApplicationController
   # POST /theses.json
   def create
     @thesis = Thesis.new(thesis_params)
-	author = Tesis.new(author_params)
-	@thesis.author = author
+
     respond_to do |format|
       if @thesis.save
         format.html { redirect_to @thesis, notice: 'Thesis was successfully created.' }
@@ -71,12 +70,7 @@ class ThesesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def thesis_params
-      params.require(:thesis).
-      permit(:name, :abstract, :language, :defended)
-      
-    end
-    
-    def author_params
-      params.require(:author).permit(:firstname, :surname)
+      params.require(:thesis).permit(:name, :abstract, :language, 
+        :defended, :faculty_id, :author_attributes => [:firstname, :surname])
     end
 end
