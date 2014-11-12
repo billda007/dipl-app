@@ -18,5 +18,13 @@
   .field
     = f.label :defended
     = f.date_select :defended
+  .field 
+    = fields_for :author do |author_form|
+      .field
+        = author_form.label :firstname
+        = author_form.text_area :firstname
+      .field
+        = author_form.label :surname
+        = author_form.text_area :surname
   .actions
     = f.submit 'Save'
